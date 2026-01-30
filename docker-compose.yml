@@ -1,0 +1,21 @@
+services:
+  db:
+    image: postgres:18
+    environment:
+      - POSTGRES_DB=keycloak
+      - POSTGRES_USER=keycloak
+      - POSTGRES_PASSWORD=keycloak
+    ports:
+      - 5540:5432
+  keycloak:
+    image: niklas/mykeycloak:latest
+    environment:
+      - KC_HOSTNAME=localhost
+      - KC_DB_URL=jdbc:postgresql://db:5432/keycloak
+      - KC_DB_USERNAME=keycloak
+      - KC_DB_PASSWORD=keycloak
+      - KC_BOOTSTRAP_ADMIN_USERNAME=niklas
+      - KC_BOOTSTRAP_ADMIN_PASSWORD=Niklas12
+    ports:
+      - 8080:8080
+      - 8443:8443
